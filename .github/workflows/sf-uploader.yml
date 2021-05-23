@@ -35,7 +35,7 @@ jobs:
               expect \"sftp> \"
               send \"cd ${{ secrets.SFDIR }}\r\"
               set timeout -1
-              send \"put Decrypted-ofp.zip\r\"
+              send \"put *.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
