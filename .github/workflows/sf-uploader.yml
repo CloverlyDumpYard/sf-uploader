@@ -20,8 +20,6 @@ jobs:
             
        - name: Downloading Now.. 
          run: |
-            sudo apt-get install expect -y
-            sudo -E apt-get -qq update
             wget $OFP_LINK
               
        - name: Upload Decrypted Zip
@@ -35,7 +33,7 @@ jobs:
               expect \"sftp> \"
               send \"cd ${{ secrets.SFDIR }}\r\"
               set timeout -1
-              send \"put Decrypted-ofp.zip\r\"
+              send \"put *.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
