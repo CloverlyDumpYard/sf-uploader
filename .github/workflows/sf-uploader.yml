@@ -20,6 +20,8 @@ jobs:
             
        - name: Downloading Now.. 
          run: |
+            sudo apt-get install expect -y
+            sudo -E apt-get -qq update
             wget $OFP_LINK
               
        - name: Upload Decrypted Zip
