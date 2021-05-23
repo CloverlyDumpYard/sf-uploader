@@ -1,0 +1,43 @@
+name: SF Uploader
+on:
+ workflow_dispatch:
+    inputs:
+      ofp_link:
+        description: 'ofp link'
+        required: true
+        
+env:
+  OFP_LINK: ${{ github.event.inputs.ofp_link }}
+  TZ: Asia/Kolkata
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+            
+       - name: Downloading Now.. 
+         run: |
+            sudo apt-get install expect -y
+            sudo -E apt-get -qq update
+            wget $OFP_LINK
+              
+       - name: Upload Decrypted Zip
+         run: |
+              expect -c " 
+              spawn sftp ${{ secrets.SFUSER }}@frs.sourceforge.net
+              expect \"yes/no\"
+              send \"yes\r\"
+              expect \"Password\"        
+              send \"${{ secrets.SFPASS }}\r\"
+              expect \"sftp> \"
+              send \"cd ${{ secrets.SFDIR }}\r\"
+              set timeout -1
+              send \"put Decrypted-ofp.zip\r\"
+              expect \"Uploading\"
+              expect \"100%\"
+              expect \"sftp>\"
+              send \"bye\r\"
+              interact"     
