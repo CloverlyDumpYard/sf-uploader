@@ -27,7 +27,6 @@ jobs:
               
        - name: Upload Decrypted Zip
          run: |
-              expect -c " 
               spawn sftp thecloverly@frs.sourceforge.net
               expect \"yes/no\"
               send \"yes\r\"
