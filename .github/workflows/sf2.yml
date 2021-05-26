@@ -1,4 +1,4 @@
-name: SF Uploader
+name: SF Uploader 2
 on:
  workflow_dispatch:
 jobs:
