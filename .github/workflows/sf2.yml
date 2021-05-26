@@ -41,7 +41,8 @@ jobs:
               expect \"100%\"
               expect \"sftp>\"
               send \"bye\r\"
-              interact"     
+              interact"
+              
        - name: Upload in SourceForge
          run: |
             source device_and_download_link
