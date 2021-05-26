@@ -27,5 +27,18 @@ jobs:
               
        - name: Upload in SourceForge
          run: |
-            source device_and_download_link
-            rsync -vhcP -e ssh realme6seriesdownloads* thecloverly@frs.sourceforge.net:/home/frs/project/realme6seriesdownloads/eleven/$device/
+              expect -c " 
+              spawn sftp ${{ secrets.SFUSER }}@frs.sourceforge.net
+              expect \"yes/no\"
+              send \"yes\r\"
+              expect \"Password\"        
+              send \"${{ secrets.SFPASS }}\r\"
+              expect \"sftp> \"
+              send \"cd ${{ secrets.SFDIRCT }}\r\"
+              set timeout -1
+              send \"put *.zip\r\"
+              expect \"Uploading\"
+              expect \"100%\"
+              expect \"sftp>\"
+              send \"bye\r\"
+              interact"     
