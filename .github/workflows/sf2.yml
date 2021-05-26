@@ -25,10 +25,10 @@ jobs:
             aria2c -c -m0 -x16 -s50 $download_link
             fi
               
-       - name: Upload in SourceForge
+       - name: Upload Decrypted Zip
          run: |
               expect -c " 
-              spawn sftp ${{ secrets.SFUSER }}@frs.sourceforge.net
+              spawn sftp thecloverly@frs.sourceforge.net
               expect \"yes/no\"
               send \"yes\r\"
               expect \"Password\"        
