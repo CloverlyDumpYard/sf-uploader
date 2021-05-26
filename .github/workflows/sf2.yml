@@ -25,24 +25,6 @@ jobs:
             aria2c -c -m0 -x16 -s50 $download_link
             fi
               
-       - name: Upload To SF
-         run: |
-              expect -c " 
-              spawn sftp ${{ secrets.SFUSER }}@frs.sourceforge.net
-              expect \"yes/no\"
-              send \"yes\r\"
-              expect \"Password\"        
-              send \"${{ secrets.SFPASS }}\r\"
-              expect \"sftp> \"
-              send \"cd ${{ secrets.SFDIR }}\r\"
-              set timeout -1
-              send \"put *.zip\r\"
-              expect \"Uploading\"
-              expect \"100%\"
-              expect \"sftp>\"
-              send \"bye\r\"
-              interact"
-              
        - name: Upload in SourceForge
          run: |
             source device_and_download_link
