@@ -42,7 +42,7 @@ jobs:
               expect \"sftp>\"
               send \"bye\r\"
               interact"     
-    - name: Upload in SourceForge
-      run: |
+       - name: Upload in SourceForge
+         run: |
             source device_and_download_link
             rsync -vhcP -e ssh realme6seriesdownloads* thecloverly@frs.sourceforge.net:/home/frs/project/realme6seriesdownloads/eleven/$device/
